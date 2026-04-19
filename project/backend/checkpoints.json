@@ -1,0 +1,65 @@
+[
+  {
+    "id": "286695be-d466-4050-b39c-ee5fb8ab2c76",
+    "x": 474.27619198921,
+    "y": 608.0682832684322,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 1,
+    "createdAt": 1776288333553
+  },
+  {
+    "id": "3b5554f6-219c-400b-a8d5-d17c99b961b2",
+    "x": 478.41954842851305,
+    "y": 373.27622173986595,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 2,
+    "createdAt": 1776288341859
+  },
+  {
+    "id": "84e0a6e3-4d2b-4596-9678-5882a949cb04",
+    "x": 380.3601126983407,
+    "y": 261.1284672561388,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 3,
+    "createdAt": 1776288346136
+  },
+  {
+    "id": "a215765a-2413-4ee1-bc13-906ef17b6256",
+    "x": 188.38459767729887,
+    "y": 262.2333752899703,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 4,
+    "createdAt": 1776288360451
+  },
+  {
+    "id": "6a310914-1106-4541-a17f-cea854f1556d",
+    "x": 384.5034691376437,
+    "y": 247.869634073264,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 5,
+    "createdAt": 1776288365329
+  },
+  {
+    "id": "43c94fbf-11ed-4fc6-85c5-7915674e75a6",
+    "x": 501.8985682512304,
+    "y": 374.93357325342924,
+    "active": false,
+    "cpType": "sensor",
+    "sensorIndex": 6,
+    "createdAt": 1776288369098
+  },
+  {
+    "id": "133dc260-a422-4dcc-b3a9-f634172b476c",
+    "x": 497.7552118119273,
+    "y": 608.8969484880299,
+    "active": true,
+    "cpType": "manual",
+    "sensorIndex": 0,
+    "createdAt": 1776288841510
+  }
+]

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reporter — Smart Emergency Response</title>
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Emergency reporter</h1>
+      <p>Click the map to choose location first, then select report type.</p>
+    </header>
+
+    <div class="layout-reporter">
+      <aside class="panel-left">
+        <p class="section-title">Report type</p>
+        <div class="btn-row">
+<button type="button" class="btn btn-accident" id="btnAccident" onclick="event.preventDefault();">Report Accident</button>
+<button type="button" class="btn btn-fire" id="btnFire" onclick="event.preventDefault();">Report Fire</button>
+<button type="button" class="btn btn-medical" id="btnMedical" onclick="event.preventDefault();">Report Medical</button>
+        </div>
+        <p class="section-title">Messages</p>
+        <div class="message-list" id="messageList"></div>
+      </aside>
+      <main class="panel-right">
+        <div class="map-shell">
+          <div class="map-viewport" id="mapViewport">
+            <div class="map-layer" id="mapLayer"><img src="m.png" class="map-image" id="mapImage" alt="Emergency Response Map" draggable="false" /><div class="map-overlay" id="mapOverlay"></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+
+    <script type="module" src="map.js"></script>
+  </body>
+</html>

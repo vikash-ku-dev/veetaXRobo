@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkpoint Editor — Smart Emergency Response</title>
+    <link rel="stylesheet" href="style.css" />
+
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Checkpoint editor</h1>
+      <p>Click the map to add a checkpoint. Toggle ON/OFF to simulate sensors. Checkpoints only appear here.</p>
+    </header>
+
+    <div class="layout-checkpoint">
+      <div class="checkpoint-toolbar">
+        <p class="hint" style="margin: 0">Wheel: zoom · Drag: pan · Click: new checkpoint</p>
+        <div class="cp-mode-switch" id="checkpointModeSwitch">
+          <button type="button" class="cp-mode-btn selected" data-mode="sensor">Sensor checkpoint</button>
+          <button type="button" class="cp-mode-btn" data-mode="manual">Manual checkpoint</button>
+        </div>
+        <p class="hint" id="checkpointModeHint" style="margin: 0">Sensor checkpoints: 0/0</p>
+        <p class="section-title" style="margin: 0">Checkpoints</p>
+        <div class="checkpoint-list" id="checkpointList"></div>
+      </div>
+      <div class="checkpoint-map-wrap">
+        <div class="map-shell" style="min-height: 520px">
+          <div class="map-viewport" id="mapViewport">
+            <div class="map-layer" id="mapLayer"><img src="m.png" class="map-image" id="mapImage" alt="Emergency Response Map" draggable="false"><div class="map-overlay" id="mapOverlay"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="module" src="map.js"></script>
+  </body>
+</html>
