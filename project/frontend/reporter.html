@@ -5,34 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reporter — Smart Emergency Response</title>
     <link rel="stylesheet" href="style.css" />
-
   </head>
   <body>
     <header class="app-header">
-      <h1>Emergency reporter</h1>
-      <p>Click the map to choose location first, then select report type.</p>
+      <div class="header-main">
+        <div class="header-text">
+          <h1 data-i18n="reporter_title">Emergency reporter</h1>
+          <p data-i18n="reporter_subtitle">
+            Click the map to choose location first, then select report type.
+          </p>
+        </div>
+        <div class="lang-bar">
+          <label class="lang-label">
+            <span data-i18n="language_label">Language</span>
+            <select
+              id="langSelect"
+              class="lang-select"
+              data-i18n-aria-label="language_label"
+              aria-label="Language"
+            ></select>
+          </label>
+        </div>
+      </div>
     </header>
 
     <div class="layout-reporter">
       <aside class="panel-left">
-        <p class="section-title">Report type</p>
+        <p class="section-title" data-i18n="section_report_type">Report type</p>
         <div class="btn-row">
-<button type="button" class="btn btn-accident" id="btnAccident" onclick="event.preventDefault();">Report Accident</button>
-<button type="button" class="btn btn-fire" id="btnFire" onclick="event.preventDefault();">Report Fire</button>
-<button type="button" class="btn btn-medical" id="btnMedical" onclick="event.preventDefault();">Report Medical</button>
+          <button
+            type="button"
+            class="btn btn-accident"
+            id="btnAccident"
+            data-i18n="btn_report_accident"
+            onclick="event.preventDefault();"
+          >
+            Report Accident
+          </button>
+          <button
+            type="button"
+            class="btn btn-fire"
+            id="btnFire"
+            data-i18n="btn_report_fire"
+            onclick="event.preventDefault();"
+          >
+            Report Fire
+          </button>
+          <button
+            type="button"
+            class="btn btn-medical"
+            id="btnMedical"
+            data-i18n="btn_report_medical"
+            onclick="event.preventDefault();"
+          >
+            Report Medical
+          </button>
         </div>
-        <p class="section-title">Messages</p>
+        <p class="section-title" data-i18n="section_messages">Messages</p>
         <div class="message-list" id="messageList"></div>
       </aside>
       <main class="panel-right">
         <div class="map-shell">
           <div class="map-viewport" id="mapViewport">
-            <div class="map-layer" id="mapLayer"><img src="m.png" class="map-image" id="mapImage" alt="Emergency Response Map" draggable="false" /><div class="map-overlay" id="mapOverlay"></div></div>
+            <div class="map-layer" id="mapLayer">
+              <img
+                src="m.png"
+                class="map-image"
+                id="mapImage"
+                data-i18n-alt="map_alt"
+                alt="Emergency Response Map"
+                draggable="false"
+              />
+              <div class="map-overlay" id="mapOverlay"></div>
+            </div>
           </div>
         </div>
       </main>
     </div>
-
 
     <script type="module" src="map.js"></script>
   </body>

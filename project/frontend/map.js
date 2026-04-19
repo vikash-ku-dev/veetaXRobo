@@ -4,6 +4,25 @@
  */
 import * as api from './api.js';
 import { rtdbGet, rtdbSet } from './firebase.js';
+import {
+  t,
+  initLangSelect,
+  applyDataI18n,
+  subscribeLocale,
+  syncLangSelectValue
+} from './i18n.js';
+
+/** Re-render control list when language changes (set from initControl). */
+let controlI18nRefresh = null;
+
+function formatEmergencyTypeLabel(type) {
+  const k = String(type || '').toLowerCase();
+  if (k === 'accident') return t('type_accident');
+  if (k === 'fire') return t('type_fire');
+  if (k === 'medical') return t('type_medical');
+  if (!k || k === 'unknown') return t('type_unknown');
+  return k.charAt(0).toUpperCase() + k.slice(1);
+}
 
 
 // Standalone map controller init for reporter.html (Firebase-independent)
@@ -173,13 +192,13 @@ async function initReporter() {
   }
 
   setTypeButtonsEnabled(false);
-  pushStatus('Click the map to select location first.', 'info');
+  pushStatus(t('msg_click_map_first'), 'info');
 
   Object.entries(btns).forEach(([k, b]) => {
     b?.addEventListener('click', async () => {
       if (!selected.location || !Number.isFinite(lockedLocation.x) || !Number.isFinite(lockedLocation.y)) {
         console.log('[Reporter] Select location first');
-        pushStatus('Select location on the map first.', 'warn');
+        pushStatus(t('msg_select_location_first'), 'warn');
         return;
       }
 
@@ -194,14 +213,21 @@ async function initReporter() {
       try {
         await api.postReport(payload);
         console.log('[Reporter] Backend write OK', payload);
-        pushStatus(`Report submitted: ${selected.type} @ (${Math.round(payload.x)}, ${Math.round(payload.y)})`, 'ok');
+        pushStatus(
+          t('msg_report_submitted', {
+            type: formatEmergencyTypeLabel(selected.type),
+            x: Math.round(payload.x),
+            y: Math.round(payload.y)
+          }),
+          'ok'
+        );
       } catch (err) {
         console.error('[Reporter] Backend write failed', err);
-        pushStatus('Report failed to submit. Please try again.', 'error');
+        pushStatus(t('msg_report_failed'), 'error');
       } finally {
         clearTypeSelection();
         setTypeButtonsEnabled(true);
-        pushStatus('Location kept on map. You can report again or choose a new location.', 'info');
+        pushStatus(t('msg_location_kept'), 'info');
       }
     });
   });
@@ -275,7 +301,10 @@ async function initReporter() {
     clearTypeSelection();
     setTypeButtonsEnabled(true);
     console.log('[Reporter] Location selected', coords);
-    pushStatus(`Location selected @ (${Math.round(coords.x)}, ${Math.round(coords.y)}). Now choose emergency type.`, 'ok');
+    pushStatus(
+      t('msg_location_selected', { x: Math.round(coords.x), y: Math.round(coords.y) }),
+      'ok'
+    );
     
     renderReporterMarker();
   });
@@ -733,7 +762,7 @@ function initControl() {
   }
 
   function notifyNoEmergency() {
-    window.alert('NO EMERGENCY REPORTED');
+    window.alert(t('alert_no_emergency'));
   }
 
   function setCheckpointStopsFromServer(raw) {
@@ -945,14 +974,6 @@ function initControl() {
     return false;
   }
 
-  function formatReportLabel(type) {
-    const t = String(type || 'unknown').toLowerCase();
-    if (t === 'accident') return 'Accident';
-    if (t === 'fire') return 'Fire';
-    if (t === 'medical') return 'Medical';
-    return t.charAt(0).toUpperCase() + t.slice(1);
-  }
-
   function renderReports(reports) {
     listEl.innerHTML = '';
     reports.forEach((r) => {
@@ -965,16 +986,16 @@ function initControl() {
       if (r.id === selectedReport.id) div.classList.add('selected');
       let metaLine, metaClass = 'meta';
       if (status === 'on-the-way') {
-        metaLine = '<span class="status-label">On the way</span>';
+        metaLine = `<span class="status-label">${escapeHtml(t('status_on_the_way'))}</span>`;
       } else if (status === 'to-hospital') {
-        metaLine = '<span class="status-label">On hospital way</span>';
+        metaLine = `<span class="status-label">${escapeHtml(t('status_on_hospital_way'))}</span>`;
       } else if (done) {
-        metaLine = `<span class="success-label">Successful</span> · ${ts.toLocaleString()}`;
+        metaLine = `<span class="success-label">${escapeHtml(t('status_successful'))}</span> · ${ts.toLocaleString()}`;
         metaClass = 'meta meta-success';
       } else {
         metaLine = ts.toLocaleString();
       }
-      div.innerHTML = `<strong>${escapeHtml(formatReportLabel(r.type))}</strong><div class="${metaClass}">${metaLine}</div>`;
+      div.innerHTML = `<strong>${escapeHtml(formatEmergencyTypeLabel(r.type))}</strong><div class="${metaClass}">${metaLine}</div>`;
       div.addEventListener('click', () => {
         if (done) return;
         selectReport(r);
@@ -1033,6 +1054,8 @@ function onAmbulanceReachedEmergency() {
   renderReports([]);
   selectedReport.id = null;
   placeEmergencyDot();
+
+  controlI18nRefresh = () => renderReports(cachedControlReports);
 
   fetchCheckpointsForRoute();
   syncSensorsForControl();
@@ -1411,6 +1434,20 @@ function escapeHtml(s) {
 
 async function boot() {
   const page = getPage();
+  initLangSelect();
+  controlI18nRefresh = null;
+  subscribeLocale(() => {
+    applyDataI18n();
+    syncLangSelectValue();
+    if (page === 'reporter.html') document.title = t('doc_reporter_title');
+    else if (page === 'control.html') document.title = t('doc_control_title');
+    controlI18nRefresh?.();
+  });
+  applyDataI18n();
+  syncLangSelectValue();
+  if (page === 'reporter.html') document.title = t('doc_reporter_title');
+  else if (page === 'control.html') document.title = t('doc_control_title');
+
   console.log('[App] boot', page);
   api.connectWS();
 

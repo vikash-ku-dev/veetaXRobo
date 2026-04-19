@@ -8,28 +8,58 @@
   </head>
   <body>
     <header class="app-header">
-      <h1>Operations control</h1>
-      <p>
-        Live reports on the left. Red dot = selected emergency. Dispatch the correct vehicle: fire → fire truck;
-        accident / medical → ambulance.
-      </p>
+      <div class="header-main">
+        <div class="header-text">
+          <h1 data-i18n="control_title">Operations control</h1>
+          <p data-i18n="control_subtitle">
+            Live reports on the left. Red dot = selected emergency. Dispatch the correct vehicle: fire → fire
+            truck; accident / medical → ambulance.
+          </p>
+        </div>
+        <div class="lang-bar">
+          <label class="lang-label">
+            <span data-i18n="language_label">Language</span>
+            <select
+              id="langSelect"
+              class="lang-select"
+              data-i18n-aria-label="language_label"
+              aria-label="Language"
+            ></select>
+          </label>
+        </div>
+      </div>
     </header>
 
     <div class="layout-control">
       <aside class="panel-left">
-        <p class="section-title">Real-time messages (wheel to zoom, drag to pan)</p>
+        <p class="section-title" data-i18n="section_realtime_messages">
+          Real-time messages (wheel to zoom, drag to pan)
+        </p>
         <div class="message-list" id="controlMessageList"></div>
       </aside>
       <main class="panel-right">
         <div class="map-shell">
           <div class="map-viewport" id="mapViewport">
             <div class="map-layer" id="mapLayer">
-              <img src="m.png" class="map-image" id="mapImage" alt="Emergency Response Map" draggable="false" />
+              <img
+                src="m.png"
+                class="map-image"
+                id="mapImage"
+                data-i18n-alt="map_alt"
+                alt="Emergency Response Map"
+                draggable="false"
+              />
               <div class="map-overlay" id="mapOverlay">
-                <div class="ambulance-icon" style="left: 43%; top: 80%; transform: translate(-50%, -50%);" title="Hospital ambulance">🚑</div>
+                <div
+                  class="ambulance-icon"
+                  style="left: 43%; top: 80%; transform: translate(-50%, -50%)"
+                  data-i18n-title="hospital_ambulance_title"
+                  title="Hospital ambulance"
+                >
+                  🚑
+                </div>
               </div>
             </div>
-            
           </div>
         </div>
       </main>

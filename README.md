@@ -78,6 +78,33 @@ python -m http.server 8000
 | `reporter.html` | Emergency incident reporting |
 | `style.css` | Shared styling for all interfaces |
 | `firebase.js` | Firebase configuration (currently optional) |
+| `i18n.js` | Multilingual support and language strings |
+
+## Multilingual Support
+
+The system supports **9 languages** out of the box:
+
+- **English** (en)
+- **हिन्दी** (hi) — Hindi
+- **தமிழ்** (ta) — Tamil
+- **ਪੰਜਾਬੀ** (pa) — Punjabi
+- **ಕನ್ನಡ** (kn) — Kannada
+- **ગુજરાતી** (gu) — Gujarati
+- **ଓଡ଼ିଆ** (or) — Odia
+- **বাংলা** (bn) — Bengali
+- **मराठी** (mr) — Marathi
+
+### Changing Language
+
+Users can switch languages via the language dropdown menu available on both the **Control Panel** and **Reporter** interfaces. The selected language preference is automatically saved and persists across sessions.
+
+### Adding New Languages
+
+To add a new language:
+1. Open `project/frontend/i18n.js`
+2. Add language code and label to `LOCALE_OPTIONS`
+3. Create a translation object with all required keys
+4. Export the translations in the `getTranslations()` function
 
 ## Troubleshooting
 

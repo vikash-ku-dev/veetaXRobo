@@ -12,7 +12,9 @@
   --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
   --radius: 12px;
   --radius-sm: 8px;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Tamil',
+    'Noto Sans Gurmukhi', 'Noto Sans Kannada', 'Noto Sans Gujarati', 'Noto Sans Oriya', 'Noto Sans Bengali',
+    'Nirmala UI', 'Mangal', sans-serif;
 }
 
 *,
@@ -45,6 +47,51 @@ body {
   margin: 0.35rem 0 0;
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+.header-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.lang-bar {
+  flex-shrink: 0;
+}
+
+.lang-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.lang-select {
+  min-width: 12rem;
+  max-width: 100%;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.lang-select:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
 }
 
 .layout-reporter,
