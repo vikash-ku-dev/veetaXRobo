@@ -106,13 +106,6 @@ To add a new language:
 3. Create a translation object with all required keys
 4. Export the translations in the `getTranslations()` function
 
-## Troubleshooting
-
-- **WebSocket connection refused** → Ensure backend server is running on port 3000
-- **CORS errors** → Make sure frontend is served from a local web server, not opening `file://` directly
-- **Map click not working** → Check that `ensureEmergencyParent` function is defined in `map.js`
-- **No real-time updates** → Verify WebSocket connection in browser DevTools
-
 ## Future Enhancements
 
 - Enhanced map features (route planning, estimated arrival times)
