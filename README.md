@@ -114,3 +114,9 @@ To add a new language:
 - Mobile app version
 - Integration with actual GIS/mapping services
 - Predictive dispatch algorithms
+
+  ## Opencv
+
+  -Add photo location in the computer vission folder
+  -put any car photo it detect not of vehical in this photo
+  - 
